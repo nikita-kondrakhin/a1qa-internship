@@ -1,0 +1,4 @@
+{
+  "websiteBaseUrl": "http://localhost:8080/web/",
+  "apiRequestBaseUrl": "http://localhost:8080/api/"
+}

@@ -1,0 +1,4 @@
+{
+  "getTokenEndpoint": "/token/get",
+  "variantQueryParam": "variant"
+}
