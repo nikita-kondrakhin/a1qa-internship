@@ -36,6 +36,15 @@ public class UiSteps {
 
     public static void goToNexageProjectPage() {
         projectsPage.clickNexageButton();
+//        AqualityServices.getConditionalWait().waitFor(() -> nexageProjectPage.state().isDisplayed()); //todo
         Assert.assertTrue(nexageProjectPage.state().isDisplayed(), String.format("%s is not open", nexageProjectPage.getName()));
+    }
+
+    public static void goBackToProjectsPage() {
+        browser.goBack();
+    }
+
+    public static void addNewProject() {
+        projectsPage.clickAddButton();
     }
 }

@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 public class ProjectsPage extends Form {
     private final ILabel versionLabel = getElementFactory().getLabel(By.xpath("//p[contains(@class,'footer-text')]//*[contains(text(), 'Version:')]"), "Version");
     private final IButton nexageButton = getElementFactory().getButton(By.xpath("//a[contains(text(), 'Nexage')]"), "Nexage button");
+    private final IButton addButton = getElementFactory().getButton(By.xpath("//button[contains(@class,'btn') and contains(text(), '+Add')]"), "Add button");
 
     public ProjectsPage() {
         super(By.xpath("//div[@class='panel-heading' and contains(text(), 'Available projects')]"), "Projects page");
@@ -20,5 +21,9 @@ public class ProjectsPage extends Form {
 
     public void clickNexageButton() {
         nexageButton.click();
+    }
+
+    public void clickAddButton() {
+        addButton.click();
     }
 }

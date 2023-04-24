@@ -1,20 +1,23 @@
 package steps;
 
-import constants.TestData;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import utils.ApiUtil;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-
 public class ApiSteps {
-    public static final String TOKEN = ApiUtil.getToken(TestData.VARIANT_NUMBER).asString();
+    private static String token;
 
-    public static String getToken() {
-        return TOKEN;
+    public static String getToken(int variantNumber) {
+        Response getToken = ApiUtil.getToken(variantNumber);
+        ApiUtil.checkResponseContentType(getToken, ContentType.TEXT);
+        ApiUtil.checkResponseStatusCode(getToken, HttpStatus.SC_OK);
+        token = getToken.asString();
+        return token;
     }
 
     public static void verifyToken() {
-        Assert.assertTrue(TOKEN != null && !TOKEN.isEmpty(), "Token is not generated");
+        Assert.assertTrue(token != null && !token.isEmpty(), "Token is not generated");
     }
 }

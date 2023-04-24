@@ -1,4 +1,7 @@
+/*
 package utils;
+
+import exceptions.DatabaseQueryException;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -39,3 +42,4 @@ public class DatabaseQueryUtil {
         }
     }
 }
+*/

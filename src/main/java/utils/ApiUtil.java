@@ -22,6 +22,14 @@ public class ApiUtil {
                 .post(ApiData.GET_TOKEN_ENDPOINT);
     }
 
+    public static void checkResponseContentType(Response response, ContentType contentType) {
+        logger.info(String.format("Checking that response is %s", contentType.toString()));
+        response
+                .then()
+                .assertThat()
+                .contentType(contentType);
+    }
+
     public static void checkResponseStatusCode(Response response, int code) {
         logger.info(String.format("Checking that response status code is '%s'", code));
         response
