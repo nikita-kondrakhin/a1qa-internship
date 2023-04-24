@@ -22,11 +22,11 @@ public class ApiUtil {
                 .post(ApiData.GET_TOKEN_ENDPOINT);
     }
 
-    public static void checkResponseIsText(Response response) {
-        logger.info("Checking that response is text");
+    public static void checkResponseStatusCode(Response response, int code) {
+        logger.info(String.format("Checking that response status code is '%s'", code));
         response
                 .then()
                 .assertThat()
-                .contentType(ContentType.TEXT);
+                .statusCode(code);
     }
 }

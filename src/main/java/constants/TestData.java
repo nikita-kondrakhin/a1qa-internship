@@ -4,7 +4,7 @@ import utils.JsonDataManagerUtil;
 
 public class TestData {
     public static final int VARIANT_NUMBER = JsonDataManagerUtil.getIntElementByKey(DataPaths.TEST_DATA_PATH, "variantNumber");
-    public static final String USERNAME = JsonDataManagerUtil.getStringElementByKey(DataPaths.TEST_DATA_PATH, "username");
+    public static final String USER = JsonDataManagerUtil.getStringElementByKey(DataPaths.TEST_DATA_PATH, "user");
     public static final String PASSWORD = JsonDataManagerUtil.getStringElementByKey(DataPaths.TEST_DATA_PATH, "password");
 
     private TestData() throws InstantiationException {

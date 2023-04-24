@@ -3,12 +3,16 @@ package steps;
 import aquality.selenium.browser.AqualityServices;
 import aquality.selenium.browser.Browser;
 import constants.CookieData;
+import constants.TestData;
 import org.openqa.selenium.Cookie;
 import org.testng.Assert;
+import pages.NexageProjectPage;
 import pages.ProjectsPage;
+import utils.ExtractNumberUtil;
 
 public class UiSteps {
     private static final ProjectsPage projectsPage = new ProjectsPage();
+    private static final NexageProjectPage nexageProjectPage = new NexageProjectPage();
     private static final Browser browser = AqualityServices.getBrowser();
 
 
@@ -23,5 +27,15 @@ public class UiSteps {
 
     public static void refreshPage() {
         browser.refresh();
+    }
+
+    public static void verifyVariant() {
+        int actualVariantNumber = ExtractNumberUtil.getVariantNumber(projectsPage.getVersionLabel());
+        Assert.assertEquals(actualVariantNumber, TestData.VARIANT_NUMBER, "Variant number is not correct");
+    }
+
+    public static void goToNexageProjectPage() {
+        projectsPage.clickNexageButton();
+        Assert.assertTrue(nexageProjectPage.state().isDisplayed(), String.format("%s is not open", nexageProjectPage.getName()));
     }
 }

@@ -1,5 +1,6 @@
 {
   "webAppHost": "localhost",
   "webAppBaseUrl": "http://localhost:8080/web/",
-  "apiRequestBaseUrl": "http://localhost:8080/api/"
+  "apiRequestBaseUrl": "http://localhost:8080/api/",
+  "dbConnectionUrl": "jdbc:mysql://db:13306/union_reporting"
 }

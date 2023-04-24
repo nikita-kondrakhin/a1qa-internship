@@ -8,7 +8,7 @@ public abstract class BaseTest {
     @BeforeMethod
     protected void beforeTest() {
         Browser browser = AqualityServices.getBrowser();
-        browser.network().addBasicAuthentication(ConfigData.WEB_APP_HOST, TestData.USERNAME, TestData.PASSWORD);
+        browser.network().addBasicAuthentication(ConfigData.WEB_APP_HOST, TestData.USER, TestData.PASSWORD);
         browser.maximize();
         browser.goTo(ConfigData.WEB_APP_BASE_URL);
         browser.waitForPageToLoad();
