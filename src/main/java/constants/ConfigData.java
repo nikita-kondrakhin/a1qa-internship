@@ -1,9 +1,10 @@
 package constants;
 
-import util.JsonDataManagerUtil;
+import utils.JsonDataManagerUtil;
 
 public class ConfigData {
-    public static final String WEBSITE_BASE_URL = JsonDataManagerUtil.getStringElementByKey(DataPaths.CONFIG_DATA_PATH, "websiteBaseUrl");
+    public static final String WEB_APP_HOST = JsonDataManagerUtil.getStringElementByKey(DataPaths.CONFIG_DATA_PATH, "webAppHost");
+    public static final String WEB_APP_BASE_URL = JsonDataManagerUtil.getStringElementByKey(DataPaths.CONFIG_DATA_PATH, "webAppBaseUrl");
     public static final String API_REQUEST_BASE_URL = JsonDataManagerUtil.getStringElementByKey(DataPaths.CONFIG_DATA_PATH, "apiRequestBaseUrl");
 
     private ConfigData() throws InstantiationException {

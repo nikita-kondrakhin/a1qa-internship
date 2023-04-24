@@ -1,10 +1,11 @@
 package steps;
 
 import constants.TestData;
-import util.ApiUtil;
+import utils.ApiUtil;
 
 public class ApiSteps {
-    public static void getApiToken() {
-        ApiUtil.getToken(TestData.VARIANT_NUMBER);
+    public static String getAuthorizationToken() {
+        ApiUtil.checkResponseIsText(ApiUtil.getToken(TestData.VARIANT_NUMBER));
+        return ApiUtil.getToken(TestData.VARIANT_NUMBER).asString();
     }
 }

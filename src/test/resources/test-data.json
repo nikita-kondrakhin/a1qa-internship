@@ -1,3 +1,5 @@
 {
-  "variantNumber": 1
+  "variantNumber": 1,
+  "username": "login",
+  "password": "password"
 }

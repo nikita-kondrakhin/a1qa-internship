@@ -1,6 +1,6 @@
 package constants;
 
-import util.JsonDataManagerUtil;
+import utils.JsonDataManagerUtil;
 
 public class ApiData {
     public static final String GET_TOKEN_ENDPOINT = JsonDataManagerUtil.getStringElementByKey(DataPaths.API_DATA_PATH, "getTokenEndpoint");
