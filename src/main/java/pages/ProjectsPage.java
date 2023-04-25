@@ -15,7 +15,7 @@ public class ProjectsPage extends Form {
     }
 
     public String getVersionLabel() {
-        versionLabel.state().isDisplayed();
+//        versionLabel.state().isDisplayed(); //todo
         return versionLabel.getText();
     }
 
@@ -26,4 +26,7 @@ public class ProjectsPage extends Form {
     public void clickAddButton() {
         addButton.click();
     }
+
+//    public boolean checkProjectByName(String projectName) {
+//    }
 }

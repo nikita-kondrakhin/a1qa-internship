@@ -10,6 +10,6 @@ public class ExtractNumberUtil {
 
     public static int getVariantNumber(String text) {
         logger.info("Extracting the variant number from the text");
-        return Integer.parseInt(text.split(":")[1].trim()); //todo
+        return Integer.parseInt(text.split(":")[1].trim()); //todo magic number?
     }
 }

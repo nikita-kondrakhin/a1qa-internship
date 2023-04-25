@@ -1,5 +1,8 @@
 {
   "variantNumber": 1,
   "user": "login",
-  "password": "password"
+  "password": "password",
+  "newProjectName": "TestProject",
+  "randomStringLength": 7,
+  "iframeId": "addProjectFrame"
 }
