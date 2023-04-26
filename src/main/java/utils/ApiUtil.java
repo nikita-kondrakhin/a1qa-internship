@@ -15,7 +15,7 @@ public class ApiUtil {
     private static final Logger logger = AqualityServices.getLogger();
 
     public static Response getToken(int variantNumber) {
-        logger.info(String.format("Sending API request to get token for task variant %d", variantNumber));
+        logger.info(String.format("Sending API request to generate token for task variant %d", variantNumber));
         return given()
                 .baseUri(ConfigData.API_REQUEST_BASE_URL)
                 .queryParam(ApiData.VARIANT_QUERY_PARAM, variantNumber)

@@ -1,25 +1,38 @@
 import constants.TestData;
 import org.testng.annotations.Test;
-import steps.ApiSteps;
-import steps.DatabaseSteps;
-import steps.UiSteps;
+import steps.*;
+import utils.BrowserActionsUtil;
 import utils.RandomStringUtil;
 
 public class WebAppTest extends BaseTest {
     @Test(description = "") //todo
     protected void webAppTest() {
-        UiSteps.verifyProjectsPageIsOpen();
-        UiSteps.addCookieWithToken(ApiSteps.getToken(TestData.VARIANT_NUMBER));
-        ApiSteps.verifyToken();
-        UiSteps.refreshPage();
-        UiSteps.verifyVariant();
-        UiSteps.goToNexageProjectPage();
+        ProjectsPageSteps.verifyProjectsPageIsOpen();
+        String token = AuthenticationSteps.getToken(TestData.VARIANT_NUMBER);
+        AuthenticationSteps.verifyToken();
+        AuthenticationSteps.addCookieWithToken(token);
+        ProjectsPageSteps.refreshPage();
+        ProjectsPageSteps.verifyVariant();
+        ProjectsPageSteps.goToNexageProjectPage();
+        NexageProjectPageSteps.verifyNexageProjectPageIsOpen();
 
+        NexageProjectPageSteps.getTestsFromPage();
         DatabaseSteps.getNexageProjectTestsList();
 
-        UiSteps.goBackToProjectsPage();
+        NexageProjectPageSteps.goBackToProjectsPage();
+        ProjectsPageSteps.openAddProjectForm();
+        AddProjectFormSteps.verifyAddProjectFormIsOpen();
         String projectName = TestData.NEW_PROJECT_NAME + RandomStringUtil.getRandomString(TestData.RANDOM_STRING_LENGTH);
-        UiSteps.addProject(projectName);
-        UiSteps.verifyProjectAdded(projectName);
+        BrowserActionsUtil.switchToIframe(TestData.IFRAME_ID);
+        AddProjectFormSteps.createNewProject(projectName);
+        AddProjectFormSteps.verifySuccessMessage();
+        BrowserActionsUtil.switchToDefaultContent();
+
+        AddProjectFormSteps.closePopUp();
+
+        AddProjectFormSteps.verifyAddProjectFormIsClosed();
+        ProjectsPageSteps.refreshPage();
+        ProjectsPageSteps.verifyProjectAppearedInList(projectName);
+        ProjectsPageSteps.openProjectByName(projectName);
     }
 }

@@ -19,11 +19,11 @@ public abstract class BaseTest {
         browser.waitForPageToLoad();
     }
 
-    @AfterMethod //todo
-    protected void afterTest() {
-        logger.info("Finishing test"); //todo
-        if (AqualityServices.isBrowserStarted()) {
-            browser.quit();
-        }
-    }
+//    @AfterMethod //todo
+//    protected void afterTest() {
+//        logger.info("Ending test");
+//        if (AqualityServices.isBrowserStarted()) {
+//            browser.quit();
+//        }
+//    }
 }
