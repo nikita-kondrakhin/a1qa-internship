@@ -32,6 +32,7 @@ public class ProjectsPage extends Form {
         return getElementFactory().getLabel(By.xpath(String.format(NEW_PROJECT_NAME_DYNAMIC_LOCATOR, projectName)), "New project name").state().isExist();
     }
 
-//    public boolean checkProjectByName(String projectName) {
-//    }
+    public void clickNewProject(String projectName) { //todo
+        getElementFactory().getLabel(By.xpath(String.format(NEW_PROJECT_NAME_DYNAMIC_LOCATOR, projectName)), "New project element").click();
+    }
 }

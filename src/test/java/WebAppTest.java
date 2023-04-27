@@ -37,12 +37,16 @@ public class WebAppTest extends BaseTest {
         AddProjectFormSteps.createNewProject(projectName);
         AddProjectFormSteps.verifySuccessMessage();
         BrowserActionsUtil.switchToDefaultContent();
-
         AddProjectFormSteps.closeAddProjectForm();
 
         AddProjectFormSteps.verifyAddProjectFormIsClosed();
+
         ProjectsPageSteps.refreshPage();
         ProjectsPageSteps.verifyProjectAppearedInList(projectName);
         ProjectsPageSteps.openProjectByName(projectName);
+        NewProjectPageSteps.verifyNewProjectPageIsOpen();
+
+
+
     }
 }

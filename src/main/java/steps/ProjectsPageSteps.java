@@ -47,6 +47,6 @@ public class ProjectsPageSteps {
     }
 
     public static void openProjectByName(String projectName) {
-
+        projectsPage.clickNewProject(projectName);
     }
 }

@@ -2,11 +2,10 @@ package steps;
 
 import aquality.selenium.browser.AqualityServices;
 import aquality.selenium.core.logging.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
+import constants.JsData;
 import org.testng.Assert;
 import pages.AddProjectForm;
+import utils.BrowserActionsUtil;
 
 public class AddProjectFormSteps {
     private static final Logger logger = AqualityServices.getLogger();
@@ -31,13 +30,11 @@ public class AddProjectFormSteps {
         Assert.assertTrue(addProjectForm.isSuccessMessageDisplayed(), "'Project saved' message is not displayed");
     }
 
-    public static void closeAddProjectForm() { //todo
-//        addProjectForm.closeAddProjectForm("arguments[0].setAttribute('aria-hidden', 'true');");
-        WebElement addProjectModal = AqualityServices.getBrowser().getDriver().findElement(By.id("addProject"));
-        AqualityServices.getBrowser().getDriver().executeScript("arguments[0].setAttribute('aria-hidden', 'true');", addProjectModal);
+    public static void closeAddProjectForm() {
+        BrowserActionsUtil.executeJavaScript(JsData.CLOSE_POP_UP_METHOD); //todo
     }
 
     public static void verifyAddProjectFormIsClosed() {
-        Assert.assertFalse(addProjectForm.state().isDisplayed(), String.format("%s is open", addProjectForm.getName()));
+        Assert.assertTrue(addProjectForm.isAddFormClosed(), String.format("%s is open", addProjectForm.getName()));
     }
 }

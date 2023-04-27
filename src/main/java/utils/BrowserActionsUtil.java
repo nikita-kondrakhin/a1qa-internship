@@ -35,8 +35,8 @@ public class BrowserActionsUtil {
         driver.switchTo().defaultContent();
     }
 
-    public static void executeJS(String script, Object... object) {
-        Logger.getInstance().info(String.format("Executing JS '%s' method", script));
-        browser.executeScript(script, object);
+    public static void executeJavaScript(String script) {
+        Logger.getInstance().info(String.format("Executing JavaScript '%s' method", script));
+        browser.executeScript(script);
     }
 }
