@@ -1,16 +1,17 @@
 package steps;
 
-import models.Test;
+import constants.DataPaths;
+import utils.DatabaseQueryUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseSteps {
     private DatabaseSteps() throws InstantiationException {
         throw new InstantiationException(String.format("Static %s class should not be initialized", DatabaseSteps.class.getCanonicalName())); //todo getCanonicalName?
     }
-    public static void getNexageProjectTestsList() {
-        List<Test> testList = new ArrayList<>();
 
+    public static List<String> getTestNamesFromDatabase() {
+        String query = DatabaseQueryUtil.readQueryFromFile(DataPaths.SELECT_TESTS_DESC_BY_START_TIME_QUERY_PATH);
+        return DatabaseQueryUtil.executeQueryAndAddTestNamesToList(query);
     }
 }

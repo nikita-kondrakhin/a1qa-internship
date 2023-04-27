@@ -14,4 +14,23 @@ public class Test {
     private String latestTestStartTime;
     private String latestTestEndTime;
     private String latestTestDuration;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+        Test test = (Test) obj;
+
+        return testName.equals(test.testName) &&
+                testMethod.equals(test.testMethod) &&
+                latestTestResult.equalsIgnoreCase(test.latestTestResult) &&
+                latestTestStartTime.equals(test.latestTestStartTime) &&
+                (latestTestEndTime != null && !latestTestEndTime.equals("")) ?
+                latestTestEndTime.equals(test.latestTestEndTime) : test.latestTestEndTime == null &&
+                latestTestDuration.equals(test.latestTestDuration);
+    }
 }

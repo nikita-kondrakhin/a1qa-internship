@@ -31,12 +31,10 @@ public class AddProjectFormSteps {
         Assert.assertTrue(addProjectForm.isSuccessMessageDisplayed(), "'Project saved' message is not displayed");
     }
 
-    public static void closePopUp() { //todo
+    public static void closeAddProjectForm() { //todo
 //        addProjectForm.closeAddProjectForm("arguments[0].setAttribute('aria-hidden', 'true');");
-        JavascriptExecutor jsExecutor = AqualityServices.getBrowser().getDriver();
         WebElement addProjectModal = AqualityServices.getBrowser().getDriver().findElement(By.id("addProject"));
-        jsExecutor.executeScript("arguments[0].setAttribute('aria-hidden', 'true');", addProjectModal);
-
+        AqualityServices.getBrowser().getDriver().executeScript("arguments[0].setAttribute('aria-hidden', 'true');", addProjectModal);
     }
 
     public static void verifyAddProjectFormIsClosed() {

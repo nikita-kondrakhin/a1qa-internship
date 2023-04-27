@@ -1,13 +1,17 @@
-/*
 package utils;
 
+import constants.ColumnNames;
 import exceptions.DatabaseQueryException;
+import lombok.experimental.UtilityClass;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
+@UtilityClass
 public class DatabaseQueryUtil {
     public static String readQueryFromFile(String filePath) {
         try {
@@ -17,29 +21,20 @@ public class DatabaseQueryUtil {
         }
     }
 
-    public static void executeQueryAndPrintResultInTable(String query) {
+    public static List<String> executeQueryAndAddTestNamesToList(String query) {
         try (Connection connection = DatabaseConnectionUtil.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            ResultSet resultSet = preparedStatement.executeQuery();
-            ResultSetMetaData metaData = resultSet.getMetaData();
-            int columnCount = metaData.getColumnCount();
-
-            StringBuilder columnHeaderBuilder = new StringBuilder();
-            for (int i = 1; i <= columnCount; i++) {
-                columnHeaderBuilder.append(String.format(DB_TABLE_ROW_FORMAT, metaData.getColumnLabel(i)));
-            }
-            logger.info(columnHeaderBuilder.toString());
-
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+            List<String> testNames = new ArrayList<>();
             while (resultSet.next()) {
-                StringBuilder rowBuilder = new StringBuilder();
-                for (int i = 1; i <= columnCount; i++) {
-                    rowBuilder.append(String.format(DB_TABLE_ROW_FORMAT, resultSet.getString(i)));
+                String testName = resultSet.getString(ColumnNames.NAME_COLUMN.getColumnName());
+                if (testName != null && !testName.isEmpty()) {
+                    testNames.add(testName);
                 }
-                logger.info(rowBuilder.toString());
             }
+            return testNames;
         } catch (SQLException e) {
-            throw new DatabaseQueryException(String.format("Error executing query and printing result in table: %s", query), e);
+            throw new DatabaseQueryException("Error executing query and adding data to list", e);
         }
     }
 }
-*/

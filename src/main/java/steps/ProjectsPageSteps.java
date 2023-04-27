@@ -17,7 +17,7 @@ public class ProjectsPageSteps {
     }
 
     public static void verifyProjectsPageIsOpen() {
-        logger.info(String.format("Checking if %s is open", projectsPage.getName()));
+        logger.info(String.format("Checking that %s is open", projectsPage.getName()));
         Assert.assertTrue(projectsPage.state().isDisplayed(), String.format("%s is not open", projectsPage.getName()));
     }
 
@@ -26,7 +26,7 @@ public class ProjectsPageSteps {
     }
 
     public static void verifyVariant() {
-        logger.info("Checking if variant number in web application footer is correct");
+        logger.info("Checking that variant number in web application footer is correct");
         int actualVariantNumber = ExtractNumberUtil.getVariantNumber(projectsPage.getVersionLabel());
         Assert.assertEquals(actualVariantNumber, TestData.VARIANT_NUMBER, "Variant number is not correct");
     }

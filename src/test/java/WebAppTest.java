@@ -1,8 +1,13 @@
 import constants.TestData;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import steps.*;
 import utils.BrowserActionsUtil;
 import utils.RandomStringUtil;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class WebAppTest extends BaseTest {
     @Test(description = "") //todo
@@ -15,10 +20,15 @@ public class WebAppTest extends BaseTest {
         ProjectsPageSteps.verifyVariant();
         ProjectsPageSteps.goToNexageProjectPage();
         NexageProjectPageSteps.verifyNexageProjectPageIsOpen();
-
-        NexageProjectPageSteps.getTestsFromPage();
-        DatabaseSteps.getNexageProjectTestsList();
-
+        NexageProjectPageSteps.verifyWebTableDisplayed();
+        List<models.Test> testsFromPageList = NexageProjectPageSteps.getTestsFromPage();
+        List<models.Test> testsFromPageSortedList = testsFromPageList.stream()
+                .sorted(Comparator.comparing(models.Test::getLatestTestStartTime).reversed())
+                .collect(Collectors.toList());
+        NexageProjectPageSteps.verifyTestsFromPageSortedByDate(testsFromPageList, testsFromPageSortedList);
+        List<String> testNamesFromPageList = NexageProjectPageSteps.getTestNamesFromPage();
+        List<String> testNamesFromDatabaseList = DatabaseSteps.getTestNamesFromDatabase();
+        NexageProjectPageSteps.verifyTestsFromPageMatchesTestsFromDatabase(testNamesFromPageList, testNamesFromDatabaseList);
         NexageProjectPageSteps.goBackToProjectsPage();
         ProjectsPageSteps.openAddProjectForm();
         AddProjectFormSteps.verifyAddProjectFormIsOpen();
@@ -28,7 +38,7 @@ public class WebAppTest extends BaseTest {
         AddProjectFormSteps.verifySuccessMessage();
         BrowserActionsUtil.switchToDefaultContent();
 
-        AddProjectFormSteps.closePopUp();
+        AddProjectFormSteps.closeAddProjectForm();
 
         AddProjectFormSteps.verifyAddProjectFormIsClosed();
         ProjectsPageSteps.refreshPage();
