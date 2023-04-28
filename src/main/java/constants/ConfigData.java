@@ -11,6 +11,6 @@ public class ConfigData {
     public static final String LOG_FILE_PATH = JsonDataManagerUtil.getStringElementByKey(DataPaths.CONFIG_DATA_PATH, "logFilePath");
 
     private ConfigData() throws InstantiationException {
-        throw new InstantiationException(String.format("Static %s class should not be initialized", ConfigData.class.getCanonicalName()));
+        throw new InstantiationException(String.format("Static %s class should not be initialized", getClass().getSimpleName()));
     }
 }

@@ -16,7 +16,7 @@ public class AuthenticationSteps {
     private static String token;
 
     private AuthenticationSteps() throws InstantiationException {
-        throw new InstantiationException(String.format("Static %s class should not be initialized", AuthenticationSteps.class.getCanonicalName()));
+        throw new InstantiationException(String.format("Static %s class should not be initialized", getClass().getSimpleName()));
     }
 
     public static String getToken(int variantNumber) {

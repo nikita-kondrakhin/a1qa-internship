@@ -36,5 +36,4 @@ public class DatabaseQueryUtil {
             DatabaseConnectionUtil.closeConnection();
         }
     }
-
 }

@@ -11,6 +11,6 @@ public class DataPaths {
     public static final String SELECT_TEST_NAMES = String.format(SQL_DATA_DIRECTORY_PATH, "selectTestNames.sql");
 
     private DataPaths() throws InstantiationException {
-        throw new InstantiationException(String.format("Static %s class should not be initialized", DataPaths.class.getCanonicalName())); //todo getCanonicalName?
+        throw new InstantiationException(String.format("Static %s class should not be initialized", getClass().getSimpleName()));
     }
 }

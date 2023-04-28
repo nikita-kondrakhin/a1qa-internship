@@ -3,14 +3,9 @@ import aquality.selenium.browser.Browser;
 import aquality.selenium.core.logging.Logger;
 import constants.ConfigData;
 import constants.TestData;
-import models.Test;
-import org.testng.Reporter;
-import org.testng.annotations.AfterMethod;
+import models.webapp.Test;
 import org.testng.annotations.BeforeMethod;
 import utils.LogUtil;
-import utils.TimeUtil;
-
-import java.net.MalformedURLException;
 
 public abstract class BaseTest {
     private final Logger logger = AqualityServices.getLogger();
@@ -19,7 +14,7 @@ public abstract class BaseTest {
 
     @BeforeMethod
     protected void beforeTest() {
-//        LogUtil.deleteLogFile(); todo
+        LogUtil.deleteLogFile(); //todo
         logger.info("Authorizing with Basic Authentication");
 //        test.setLatestTestStartTime(TimeUtil.getCurrentTime());
 //        test.setTestName(Reporter.getCurrentTestResult().getInstanceName());

@@ -1,5 +1,4 @@
 import constants.TestData;
-import org.testng.IClass;
 import org.testng.annotations.Test;
 import steps.*;
 import utils.BrowserActionsUtil;
@@ -23,9 +22,9 @@ public class WebAppTest extends BaseTest {
         ProjectsPageSteps.goToNexageProjectPage();
         NexageProjectPageSteps.verifyNexageProjectPageIsOpen();
         NexageProjectPageSteps.verifyWebTableDisplayed();
-        List<models.Test> testsFromPageList = NexageProjectPageSteps.getTestsFromPage();
-        List<models.Test> testsFromPageSortedList = testsFromPageList.stream()
-                .sorted(Comparator.comparing(models.Test::getLatestTestStartTime).reversed())
+        List<models.webapp.Test> testsFromPageList = NexageProjectPageSteps.getTestsFromPage();
+        List<models.webapp.Test> testsFromPageSortedList = testsFromPageList.stream()
+                .sorted(Comparator.comparing(models.webapp.Test::getLatestTestStartTime).reversed())
                 .collect(Collectors.toList());
         NexageProjectPageSteps.verifyTestsFromPageSortedByDate(testsFromPageList, testsFromPageSortedList);
         List<String> testNamesFromPageList = NexageProjectPageSteps.getTestNamesFromPage();

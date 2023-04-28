@@ -4,17 +4,14 @@ import aquality.selenium.browser.AqualityServices;
 import aquality.selenium.core.logging.Logger;
 import constants.TestsWebTableColumnNames;
 import lombok.experimental.UtilityClass;
-import models.Test;
+import models.webapp.Test;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @UtilityClass
 public class WebTableUtil {
@@ -22,37 +19,11 @@ public class WebTableUtil {
     private static final String TH_TD = "th,td";
     private static final String TR = "tr";
 
- /*   public static ArrayList<Test> getTestsFromWebTable(String body) {
-        logger.info("Getting tests from HTML table");
-        Document doc = Jsoup.parse(body, StandardCharsets.UTF_8.name());
-        Elements rows = doc.select(TR);
-        Elements first = rows.first().select(TH_TD);
-        List<String> headers = new ArrayList<>();
-        for (Element header : first) {
-            headers.add(header.text());
-        }
-        ArrayList<Test> testsList = new ArrayList<>();
-        Map<String, String> tuple = new HashMap<>();
-        for (int row = 1; row < rows.size(); row++) {
-            Elements colVals = rows.get(row).select(TH_TD);
-            int colCount = 0;
-            for (Element colVal : colVals) {
-                tuple.put(headers.get(colCount++), colVal.text());
-            }
-            Test test = getTestsFromMap(tuple);
-            if (!test.getLatestTestResult().equals("In progress")) {
-                testsList.add(test);
-            }
-            tuple.clear();
-        }
-        return testsList;
-    }*/
-
-    public static List<Test> getTestsFromWebTable(String webTableInnerHtml) {
+    public static List<Test> getTestsFromWebTable(String html) {
         logger.info("Getting tests from web table");
-        Document doc = Jsoup.parse(webTableInnerHtml, StandardCharsets.UTF_8.name());
+        Document doc = Jsoup.parse(html, StandardCharsets.UTF_8.name());
         Elements rows = doc.select(TR);
-        Elements firstRow = rows.first().select(TH_TD);
+        Elements firstRow = Objects.requireNonNull(rows.first()).select(TH_TD);
         List<String> headers = new ArrayList<>();
         for (Element header : firstRow) {
             headers.add(header.text());
@@ -86,7 +57,7 @@ public class WebTableUtil {
         logger.info("Getting test names from web table");
         Document doc = Jsoup.parse(body, StandardCharsets.UTF_8.name());
         Elements rows = doc.select(TR);
-        Elements firstRow = rows.first().select(TH_TD);
+        Elements firstRow = Objects.requireNonNull(rows.first()).select(TH_TD);
         List<String> headers = new ArrayList<>();
         for (Element header : firstRow) {
             headers.add(header.text());

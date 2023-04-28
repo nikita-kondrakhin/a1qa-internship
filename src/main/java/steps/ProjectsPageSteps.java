@@ -13,7 +13,7 @@ public class ProjectsPageSteps {
     private static final ProjectsPage projectsPage = new ProjectsPage();
 
     private ProjectsPageSteps() throws InstantiationException {
-        throw new InstantiationException(String.format("Static %s class should not be initialized", ProjectsPageSteps.class.getCanonicalName()));
+        throw new InstantiationException(String.format("Static %s class should not be initialized", getClass().getSimpleName()));
     }
 
     public static void verifyProjectsPageIsOpen() {
@@ -37,7 +37,7 @@ public class ProjectsPageSteps {
     }
 
     public static void openAddProjectForm() {
-        logger.info("Opening Add project form"); //todo open duplication, decide to use 'checking if' or 'checking that'
+        logger.info("Opening Add project form");
         projectsPage.clickAddButton();
     }
 

@@ -12,7 +12,7 @@ public class AddProjectFormSteps {
     private static final AddProjectForm addProjectForm = new AddProjectForm();
 
     private AddProjectFormSteps() throws InstantiationException {
-        throw new InstantiationException(String.format("Static %s class should not be initialized", AddProjectFormSteps.class.getCanonicalName()));
+        throw new InstantiationException(String.format("Static %s class should not be initialized", getClass().getSimpleName()));
     }
 
     public static void verifyAddProjectFormIsOpen() {

@@ -16,7 +16,8 @@ public class LogUtil {
     private static final String INFO = "INFO";
     private static final int LINES_QUANTITY_LIMIT = 100;
     private static final int LINE_LENGTH_LIMIT = 200;
-    private static final Path logFilePath = Paths.get(ConfigData.LOG_FILE_PATH);
+//    private static final Path logFilePath = Paths.get(ConfigData.LOG_FILE_PATH); todo
+    private static final Path logFilePath = new File(ConfigData.LOG_FILE_PATH).toPath();
 
     public static String getLog() {
         try (Stream<String> lines = Files.lines(logFilePath)) {
