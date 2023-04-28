@@ -4,32 +4,29 @@ import constants.ConfigData;
 import constants.TestData;
 import exceptions.DatabaseConnectionException;
 import lombok.experimental.UtilityClass;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import org.sql2o.*;
 
 @UtilityClass
 public class DatabaseConnectionUtil {
-    private static Connection dbConnection = null;
+    private static Connection connection = null;
 
     public static Connection getConnection() {
         try {
-            if (dbConnection == null || dbConnection.isClosed()) {
-                dbConnection = DriverManager.getConnection(ConfigData.DB_CONNECTION_URL, TestData.USER, TestData.PASSWORD);
+            if (connection == null) {
+                connection = new Sql2o(ConfigData.DB_CONNECTION_URL, TestData.USER, TestData.PASSWORD).open();
             }
-            return dbConnection;
-        } catch (SQLException e) {
+            return connection;
+        } catch (Sql2oException e) {
             throw new DatabaseConnectionException("Failed to connect to database", e);
         }
     }
 
     public static void closeConnection() {
         try {
-            if (dbConnection != null && !dbConnection.isClosed()) {
-                dbConnection.close();
+            if (connection != null) {
+                connection.close();
             }
-        } catch (SQLException e) {
+        } catch (Sql2oException e) {
             throw new DatabaseConnectionException("Failed to close database connection", e);
         }
     }

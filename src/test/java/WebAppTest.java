@@ -30,6 +30,14 @@ public class WebAppTest extends BaseTest {
         NexageProjectPageSteps.verifyTestsFromPageSortedByDate(testsFromPageList, testsFromPageSortedList);
         List<String> testNamesFromPageList = NexageProjectPageSteps.getTestNamesFromPage();
         List<String> testNamesFromDatabaseList = DatabaseSteps.getTestNamesFromDatabase();
+
+        for(int i = 0; i < testsFromPageList.size(); i++) {
+            System.out.println("Data from PG: " + testsFromPageSortedList.get(i) + "!!!");
+            System.out.println("Name from PG: " + testNamesFromPageList.get(i) + "!!!");
+            System.out.println("Data from DB: " + testNamesFromDatabaseList.get(i) + "!!!");
+            System.out.println();
+        }
+
         NexageProjectPageSteps.verifyTestsFromPageMatchesTestsFromDatabase(testNamesFromPageList, testNamesFromDatabaseList);
         NexageProjectPageSteps.goBackToProjectsPage();
         ProjectsPageSteps.openAddProjectForm();

@@ -2,7 +2,7 @@ package utils;
 
 import aquality.selenium.browser.AqualityServices;
 import aquality.selenium.core.logging.Logger;
-import constants.WebTableColumnNames;
+import constants.TestsWebTableColumnNames;
 import lombok.experimental.UtilityClass;
 import models.Test;
 import org.jsoup.Jsoup;
@@ -73,12 +73,12 @@ public class WebTableUtil {
 
     private static Test getTestsFromMap(Map<String, String> tuple) {
         Test test = new Test();
-        test.setTestName(tuple.get(WebTableColumnNames.NAME_COLUMN.getColumnName()));
-        test.setTestMethod(tuple.get(WebTableColumnNames.METHOD_COLUMN.getColumnName()));
-        test.setLatestTestResult(tuple.get(WebTableColumnNames.LATEST_TEST_RESULT_COLUMN.getColumnName()));
-        test.setLatestTestStartTime(tuple.get(WebTableColumnNames.START_TIME_COLUMN.getColumnName()));
-        test.setLatestTestEndTime(tuple.get(WebTableColumnNames.END_TIME_COLUMN.getColumnName()));
-        test.setLatestTestDuration(tuple.get(WebTableColumnNames.DURATION_COLUMN.getColumnName()));
+        test.setTestName(tuple.get(TestsWebTableColumnNames.NAME_COLUMN.getColumnName()));
+        test.setTestMethod(tuple.get(TestsWebTableColumnNames.METHOD_COLUMN.getColumnName()));
+        test.setLatestTestResult(tuple.get(TestsWebTableColumnNames.LATEST_TEST_RESULT_COLUMN.getColumnName()));
+        test.setLatestTestStartTime(tuple.get(TestsWebTableColumnNames.START_TIME_COLUMN.getColumnName()));
+        test.setLatestTestEndTime(tuple.get(TestsWebTableColumnNames.END_TIME_COLUMN.getColumnName()));
+        test.setLatestTestDuration(tuple.get(TestsWebTableColumnNames.DURATION_COLUMN.getColumnName()));
         return test;
     }
 
@@ -96,7 +96,7 @@ public class WebTableUtil {
         for (int row = 1; row < rows.size(); row++) {
             Elements columnValues = rows.get(row).select(TH_TD);
             tuple.put(headers.get(0), columnValues.get(0).text());
-            String testName = tuple.get(WebTableColumnNames.NAME_COLUMN.getColumnName());
+            String testName = tuple.get(TestsWebTableColumnNames.NAME_COLUMN.getColumnName());
             if (testName != null && !testName.isEmpty()) {
                 testNamesList.add(testName);
             }

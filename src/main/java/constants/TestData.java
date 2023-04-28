@@ -10,6 +10,7 @@ public class TestData {
     public static final String NEW_TEST_NAME = JsonDataManagerUtil.getStringElementByKey(DataPaths.TEST_DATA_PATH, "newTestName");
     public static final int RANDOM_STRING_LENGTH = JsonDataManagerUtil.getIntElementByKey(DataPaths.TEST_DATA_PATH, "randomStringLength");
     public static final String IFRAME_ID = JsonDataManagerUtil.getStringElementByKey(DataPaths.TEST_DATA_PATH, "iframeId"); //todo
+    public static final String COLUMN_NAME = JsonDataManagerUtil.getStringElementByKey(DataPaths.TEST_DATA_PATH, "columnName");
 
     private TestData() throws InstantiationException {
         throw new InstantiationException(String.format("Static %s class should not be initialized", TestData.class.getCanonicalName()));

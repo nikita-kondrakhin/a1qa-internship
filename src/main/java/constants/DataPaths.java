@@ -8,7 +8,7 @@ public class DataPaths {
     public static final String API_DATA_PATH = String.format(JSON_DATA_DIRECTORY_PATH, "api-data.json");
     public static final String COOKIE_DATA_PATH = String.format(JSON_DATA_DIRECTORY_PATH, "cookie-data.json");
     public static final String JS_DATA_PATH = String.format(JSON_DATA_DIRECTORY_PATH, "js-data.json");
-    public static final String SELECT_TESTS_DESC_BY_START_TIME_QUERY_PATH = String.format(SQL_DATA_DIRECTORY_PATH, "selectTestsDescByStartTime.sql");
+    public static final String SELECT_TEST_NAMES = String.format(SQL_DATA_DIRECTORY_PATH, "selectTestNames.sql");
 
     private DataPaths() throws InstantiationException {
         throw new InstantiationException(String.format("Static %s class should not be initialized", DataPaths.class.getCanonicalName())); //todo getCanonicalName?

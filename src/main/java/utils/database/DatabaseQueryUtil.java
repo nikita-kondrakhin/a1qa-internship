@@ -1,6 +1,5 @@
 package utils.database;
 
-import constants.WebTableColumnNames;
 import exceptions.DatabaseQueryException;
 import lombok.experimental.UtilityClass;
 
@@ -9,11 +8,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import org.sql2o.Connection;
-import org.sql2o.Query;
-import org.sql2o.ResultSetIterable;
+import org.sql2o.Sql2oException;
+import org.sql2o.data.Table;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @UtilityClass
 public class DatabaseQueryUtil {
@@ -25,39 +24,16 @@ public class DatabaseQueryUtil {
         }
     }
 
-//    public static List<String> executeQueryAndAddTestNamesToList(String query) {
-//        try (Connection connection = DatabaseConnectionUtil.getConnection();
-//             Statement statement = connection.createStatement();
-//             ResultSet resultSet = statement.executeQuery(query)) {
-//            List<String> testNames = new ArrayList<>();
-//            while (resultSet.next()) {
-//                String testName = resultSet.getString(WebTableColumnNames.NAME_COLUMN.getColumnName());
-//                if (testName != null && !testName.isEmpty()) {
-//                    testNames.add(testName);
-//                }
-//            }
-//            return testNames;
-//        } catch (SQLException e) {
-//            throw new DatabaseQueryException("Error executing query and adding data to list", e);
-//        }
-//    }
-
-    public static List<String> executeQueryAndAddTestNamesToList(String query) {
+    public static List<String> getDatabaseColumnValues(String query, String columnName) {
         try (Connection connection = DatabaseConnectionUtil.getConnection()) {
-            List<String> testNames = connection.createQuery(query)
-                    .executeAndFetch((ResultSet resultSet) -> {
-                        List<String> names = new ArrayList<>();
-                        while (resultSet.next()) {
-                            String testName = resultSet.getString(WebTableColumnNames.NAME_COLUMN.getColumnName());
-                            if (testName != null && !testName.isEmpty()) {
-                                names.add(testName);
-                            }
-                        }
-                        return names;
-                    });
-            return testNames;
-        } catch (SQLException e) {
+            Table table = connection.createQuery(query).executeAndFetchTable();
+            return table.rows().stream()
+                    .map(row -> row.getString(columnName))
+                    .collect(Collectors.toList());
+        } catch (Sql2oException e) {
             throw new DatabaseQueryException("Error executing query and adding data to list", e);
+        } finally {
+            DatabaseConnectionUtil.closeConnection();
         }
     }
 

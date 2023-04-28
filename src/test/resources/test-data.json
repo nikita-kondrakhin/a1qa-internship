@@ -5,5 +5,6 @@
   "newProjectName": "TestProject",
   "newTestName": "Test",
   "randomStringLength": 7,
-  "iframeId": "addProjectFrame"
+  "iframeId": "addProjectFrame",
+  "columnName": "name"
 }

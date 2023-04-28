@@ -1,6 +1,7 @@
 package steps;
 
 import constants.DataPaths;
+import constants.TestData;
 import utils.database.DatabaseQueryUtil;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public class DatabaseSteps {
     }
 
     public static List<String> getTestNamesFromDatabase() {
-        String query = DatabaseQueryUtil.readQueryFromFile(DataPaths.SELECT_TESTS_DESC_BY_START_TIME_QUERY_PATH);
-        return DatabaseQueryUtil.executeQueryAndAddTestNamesToList(query);
+        String query = DatabaseQueryUtil.readQueryFromFile(DataPaths.SELECT_TEST_NAMES);
+        return DatabaseQueryUtil.getDatabaseColumnValues(query, TestData.COLUMN_NAME);
     }
 }
