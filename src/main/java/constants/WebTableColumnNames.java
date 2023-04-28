@@ -1,6 +1,6 @@
 package constants;
 
-public enum ColumnNames {
+public enum WebTableColumnNames {
     NAME_COLUMN("Test name"),
     METHOD_COLUMN("Test method"),
     LATEST_TEST_RESULT_COLUMN("Latest test result"),
@@ -10,7 +10,7 @@ public enum ColumnNames {
 
     private final String columnName;
 
-    ColumnNames(String columnName) {
+    WebTableColumnNames(String columnName) {
         this.columnName = columnName;
     }
 

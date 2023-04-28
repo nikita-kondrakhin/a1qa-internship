@@ -4,9 +4,8 @@ import aquality.selenium.elements.interfaces.ITextBox;
 import aquality.selenium.forms.Form;
 import models.Test;
 import org.openqa.selenium.By;
-import utils.ParseTableUtil;
+import utils.WebTableUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NexageProjectPage extends Form {
@@ -23,10 +22,10 @@ public class NexageProjectPage extends Form {
     }
 
     public List<Test> getTestsFromNexageProjectPage() {
-        return ParseTableUtil.getTestsFromWebTable(webTable.getElement().getAttribute(INNER_HTML));
+        return WebTableUtil.getTestsFromWebTable(webTable.getElement().getAttribute(INNER_HTML));
     }
 
     public List<String> getTestNamesFromNexageProjectPage() {
-        return ParseTableUtil.getTestNamesFromWebTable(webTable.getElement().getAttribute(INNER_HTML));
+        return WebTableUtil.getTestNamesFromWebTable(webTable.getElement().getAttribute(INNER_HTML));
     }
 }

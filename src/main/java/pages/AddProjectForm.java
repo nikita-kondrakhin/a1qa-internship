@@ -11,9 +11,12 @@ public class AddProjectForm extends Form {
     private final IButton saveProjectButton = getElementFactory().getButton(By.xpath("//button[text()='Cancel']/preceding-sibling::button"), "Save project button");
     private final ILabel successMessage = getElementFactory().getLabel(By.xpath("//div[contains(@class,'alert-success')]"), "Success message");
     private final ILabel addProjectModal = getElementFactory().getLabel(By.id("addProject"), "Add project modal");
+    private static final String ADD_PROJECT_MODAL_ATTRIBUTE = "aria-hidden";
+    private static final String ADD_PROJECT_MODAL_ATTRIBUTE_VALUE = "true";
+
 
     public AddProjectForm() {
-        super(By.id("addProject"), "Add project form");
+        super(By.xpath("//h4[contains(text(),'Add project')]"), "Add project form");
     }
 
     public void inputProjectName(String projectName) {
@@ -31,8 +34,6 @@ public class AddProjectForm extends Form {
     }
 
     public boolean isAddFormClosed() {
-//        return addProjectModal.getAttribute("aria-hidden").contains("true");
-        String displayStyle = addProjectModal.getCssValue("display");
-        return displayStyle.equals("none;");
+        return addProjectModal.getAttribute(ADD_PROJECT_MODAL_ATTRIBUTE).contains(ADD_PROJECT_MODAL_ATTRIBUTE_VALUE);
     }
 }

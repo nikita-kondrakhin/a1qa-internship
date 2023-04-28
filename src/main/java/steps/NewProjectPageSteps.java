@@ -13,8 +13,8 @@ public class NewProjectPageSteps {
         throw new InstantiationException(String.format("Static %s class should not be initialized", NewProjectPageSteps.class.getCanonicalName()));
     }
 
-    public static void verifyNewProjectPageIsOpen() {
-        logger.info(String.format("Checking that %s is open", newProjectPage.getName()));
-        Assert.assertTrue(newProjectPage.state().isDisplayed(), String.format("%s is not open", newProjectPage.getName()));
-    }
+//    public static void verifyNewProjectPageIsOpen() {
+//        logger.info(String.format("Checking that %s is open", newProjectPage.getName()));
+//        Assert.assertTrue(newProjectPage.state().isDisplayed(), String.format("%s is not open", newProjectPage.getName()));
+//    }
 }

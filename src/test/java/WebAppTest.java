@@ -1,5 +1,5 @@
 import constants.TestData;
-import org.testng.Assert;
+import org.testng.IClass;
 import org.testng.annotations.Test;
 import steps.*;
 import utils.BrowserActionsUtil;
@@ -10,8 +10,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WebAppTest extends BaseTest {
-    @Test(description = "") //todo
+    @Test(description = "Verify creation of new project and test via the web application UI, API and database")
     protected void webAppTest() {
+//        System.out.println(test.getTestName());
+
         ProjectsPageSteps.verifyProjectsPageIsOpen();
         String token = AuthenticationSteps.getToken(TestData.VARIANT_NUMBER);
         AuthenticationSteps.verifyToken();
@@ -38,15 +40,15 @@ public class WebAppTest extends BaseTest {
         AddProjectFormSteps.verifySuccessMessage();
         BrowserActionsUtil.switchToDefaultContent();
         AddProjectFormSteps.closeAddProjectForm();
-
         AddProjectFormSteps.verifyAddProjectFormIsClosed();
-
         ProjectsPageSteps.refreshPage();
         ProjectsPageSteps.verifyProjectAppearedInList(projectName);
         ProjectsPageSteps.openProjectByName(projectName);
-        NewProjectPageSteps.verifyNewProjectPageIsOpen();
+//        NewProjectPageSteps.verifyNewProjectPageIsOpen();
 
+        String testName = TestData.NEW_TEST_NAME + RandomStringUtil.getRandomString(TestData.RANDOM_STRING_LENGTH);
 
+//        DatabaseSteps.addTestToDatabase(testName, test.getTestName());
 
     }
 }

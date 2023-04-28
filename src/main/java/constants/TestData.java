@@ -7,6 +7,7 @@ public class TestData {
     public static final String USER = JsonDataManagerUtil.getStringElementByKey(DataPaths.TEST_DATA_PATH, "user");
     public static final String PASSWORD = JsonDataManagerUtil.getStringElementByKey(DataPaths.TEST_DATA_PATH, "password");
     public static final String NEW_PROJECT_NAME = JsonDataManagerUtil.getStringElementByKey(DataPaths.TEST_DATA_PATH, "newProjectName");
+    public static final String NEW_TEST_NAME = JsonDataManagerUtil.getStringElementByKey(DataPaths.TEST_DATA_PATH, "newTestName");
     public static final int RANDOM_STRING_LENGTH = JsonDataManagerUtil.getIntElementByKey(DataPaths.TEST_DATA_PATH, "randomStringLength");
     public static final String IFRAME_ID = JsonDataManagerUtil.getStringElementByKey(DataPaths.TEST_DATA_PATH, "iframeId"); //todo
 

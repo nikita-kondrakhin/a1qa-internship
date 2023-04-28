@@ -3,6 +3,7 @@
   "user": "login",
   "password": "password",
   "newProjectName": "TestProject",
+  "newTestName": "Test",
   "randomStringLength": 7,
   "iframeId": "addProjectFrame"
 }

@@ -1,7 +1,7 @@
 package steps;
 
 import constants.DataPaths;
-import utils.DatabaseQueryUtil;
+import utils.database.DatabaseQueryUtil;
 
 import java.util.List;
 
