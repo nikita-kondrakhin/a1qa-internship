@@ -42,6 +42,6 @@ public class BrowserActionsUtil {
 
     public byte[] getWebpageScreenshot() {
         logger.info("Getting webpage screenshot");
-        return browser.getScreenshot(); //todo logger?
+        return browser.getScreenshot();
     }
 }

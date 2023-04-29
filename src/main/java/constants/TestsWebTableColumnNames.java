@@ -1,8 +1,8 @@
 package constants;
 
 public enum TestsWebTableColumnNames {
-    NAME_COLUMN("Test name"),
-    METHOD_COLUMN("Test method"),
+    NAME_COLUMN("WebTableRecord name"),
+    METHOD_COLUMN("WebTableRecord method"),
     LATEST_TEST_RESULT_COLUMN("Latest test result"),
     START_TIME_COLUMN("Latest test start time"),
     END_TIME_COLUMN("Latest test end time"),

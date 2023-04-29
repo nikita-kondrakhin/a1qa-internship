@@ -4,7 +4,7 @@ import aquality.selenium.browser.AqualityServices;
 import aquality.selenium.core.logging.Logger;
 import constants.TestsWebTableColumnNames;
 import lombok.experimental.UtilityClass;
-import models.webapp.Test;
+import models.webapp.WebTableRecord;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -19,7 +19,7 @@ public class WebTableUtil {
     private static final String TH_TD = "th,td";
     private static final String TR = "tr";
 
-    public static List<Test> getTestsFromWebTable(String html) {
+    public static List<WebTableRecord> getTestsFromWebTable(String html) {
         logger.info("Getting tests from web table");
         Document doc = Jsoup.parse(html, StandardCharsets.UTF_8.name());
         Elements rows = doc.select(TR);
@@ -28,7 +28,7 @@ public class WebTableUtil {
         for (Element header : firstRow) {
             headers.add(header.text());
         }
-        ArrayList<Test> testsList = new ArrayList<>();
+        ArrayList<WebTableRecord> testsList = new ArrayList<>();
         Map<String, String> tuple = new HashMap<>();
         for (int row = 1; row < rows.size(); row++) {
             Elements columnValues = rows.get(row).select(TH_TD);
@@ -42,15 +42,15 @@ public class WebTableUtil {
         return testsList;
     }
 
-    private static Test getTestsFromMap(Map<String, String> tuple) {
-        Test test = new Test();
-        test.setTestName(tuple.get(TestsWebTableColumnNames.NAME_COLUMN.getColumnName()));
-        test.setTestMethod(tuple.get(TestsWebTableColumnNames.METHOD_COLUMN.getColumnName()));
-        test.setLatestTestResult(tuple.get(TestsWebTableColumnNames.LATEST_TEST_RESULT_COLUMN.getColumnName()));
-        test.setLatestTestStartTime(tuple.get(TestsWebTableColumnNames.START_TIME_COLUMN.getColumnName()));
-        test.setLatestTestEndTime(tuple.get(TestsWebTableColumnNames.END_TIME_COLUMN.getColumnName()));
-        test.setLatestTestDuration(tuple.get(TestsWebTableColumnNames.DURATION_COLUMN.getColumnName()));
-        return test;
+    private static WebTableRecord getTestsFromMap(Map<String, String> tuple) {
+        WebTableRecord webTableRecord = new WebTableRecord();
+        webTableRecord.setTestName(tuple.get(TestsWebTableColumnNames.NAME_COLUMN.getColumnName()));
+        webTableRecord.setTestMethod(tuple.get(TestsWebTableColumnNames.METHOD_COLUMN.getColumnName()));
+        webTableRecord.setLatestTestResult(tuple.get(TestsWebTableColumnNames.LATEST_TEST_RESULT_COLUMN.getColumnName()));
+        webTableRecord.setLatestTestStartTime(tuple.get(TestsWebTableColumnNames.START_TIME_COLUMN.getColumnName()));
+        webTableRecord.setLatestTestEndTime(tuple.get(TestsWebTableColumnNames.END_TIME_COLUMN.getColumnName()));
+        webTableRecord.setLatestTestDuration(tuple.get(TestsWebTableColumnNames.DURATION_COLUMN.getColumnName()));
+        return webTableRecord;
     }
 
     public static List<String> getTestNamesFromWebTable(String body) {

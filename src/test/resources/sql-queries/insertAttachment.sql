@@ -1,1 +1,1 @@
-INSERT INTO union_reporting.attachment (content, content_type, test_id) VALUES (:content, :content_type, :test_id);
+INSERT INTO attachment (content, content_type, test_id) VALUES (:content, :content_type, :test_id);

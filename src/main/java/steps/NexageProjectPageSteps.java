@@ -2,7 +2,7 @@ package steps;
 
 import aquality.selenium.browser.AqualityServices;
 import aquality.selenium.core.logging.Logger;
-import models.webapp.Test;
+import models.webapp.WebTableRecord;
 import org.testng.Assert;
 import pages.NexageProjectPage;
 import utils.BrowserActionsUtil;
@@ -31,11 +31,11 @@ public class NexageProjectPageSteps {
         Assert.assertTrue(nexageProjectPage.isWebTableDisplayed(), "Web table is not displayed");
     }
 
-    public static List<Test> getTestsFromPage() {
+    public static List<WebTableRecord> getTestsFromPage() {
         return nexageProjectPage.getTestsFromNexageProjectPage();
     }
 
-    public static void verifyTestsFromPageSortedByDate(List<Test> list, List<Test> sortedList) {
+    public static void verifyTestsFromPageSortedByDate(List<WebTableRecord> list, List<WebTableRecord> sortedList) {
         logger.info(String.format("Checking that tests on %s are sorted by date in descending order", nexageProjectPage.getName()));
         Assert.assertEquals(list, sortedList, String.format("Tests on %s are not sorted by date in descending order", nexageProjectPage.getName()));
     }

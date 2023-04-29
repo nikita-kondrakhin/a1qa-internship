@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TestTable extends BaseTable{
+public class TestTableRecord extends BaseTableRecord {
     private String name;
     private Integer statusId;
     private String methodName;

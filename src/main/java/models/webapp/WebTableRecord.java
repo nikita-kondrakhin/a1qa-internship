@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Test {
+public class WebTableRecord {
     private String testName;
     private String testMethod;
     private String latestTestResult;
@@ -16,15 +16,14 @@ public class Test {
     private String latestTestDuration;
 
 //    @Override //todo
-//    public boolean equals(Object obj) {
-//        if (obj == this) {
+//    public boolean equals(Object object) {
+//        if (object == this) {
 //            return true;
 //        }
-//        if (obj == null || obj.getClass() != this.getClass()) {
+//        if (object == null || object.getClass() != this.getClass()) {
 //            return false;
 //        }
-//        Test test = (Test) obj;
-//
+//        WebTableRecord test = (WebTableRecord) object;
 //        return testName.equals(test.testName) &&
 //                testMethod.equals(test.testMethod) &&
 //                latestTestResult.equalsIgnoreCase(test.latestTestResult) &&

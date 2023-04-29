@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class LogTable extends BaseTable{
-    String content;
-    Integer isException;
-    Integer testId;
+public class ProjectTableRecord extends BaseTableRecord {
+    String name;
 }

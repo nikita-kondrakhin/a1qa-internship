@@ -3,16 +3,15 @@ package utils.database;
 import exceptions.DatabaseQueryException;
 import lombok.experimental.UtilityClass;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import models.database.BaseTable;
+import models.database.BaseTableRecord;
 import org.sql2o.Connection;
-import org.sql2o.Query;
 import org.sql2o.Sql2oException;
-import org.sql2o.converters.ByteArrayConverter;
 import org.sql2o.data.Table;
 
 import java.util.List;
@@ -43,23 +42,21 @@ public class DatabaseQueryUtil {
         }
     }
 
-    public static void insertAttachmentIntoDatabase(String query, byte[] bytes, int testId) {
+    public Integer getProjectIdByName(String name, String query) {
         try {
-            Query sql2oQuery = connection.createQuery(query)
-                    .addParameter("content", bytes, java.sql.Types.BLOB)
-                    .addParameter("content_type", "image/png") //todo hardcode
-                    .addParameter("test_id", testId);
-            sql2oQuery.executeUpdate();
-        } catch (Sql2oException e) {
-            throw new DatabaseQueryException("Error inserting image into database", e);
+            return connection.createQuery(query)
+                    .addParameter("name", name)
+                    .executeScalar(Integer.class);
+        } catch (Sql2oException ex) {
+            throw new DatabaseQueryException("Error retrieving project id by name", ex);
         } finally {
             DatabaseConnectionUtil.closeConnection();
         }
     }
 
-    public static <T extends BaseTable> int createRecordAndGetId(String request, T tModel) {
+    public static <T extends BaseTableRecord> int createRecordAndGetId(String query, T tModel) {
         try {
-            BigInteger key = (BigInteger) connection.createQuery(request)
+            BigInteger key = (BigInteger) connection.createQuery(query)
                     .bind(tModel)
                     .executeUpdate()
                     .getKey();
@@ -69,6 +66,32 @@ public class DatabaseQueryUtil {
             return key.intValueExact();
         } catch (Sql2oException e) {
             throw new DatabaseQueryException("Error executing insert query", e);
+        } finally {
+            DatabaseConnectionUtil.closeConnection();
+        }
+    }
+
+    public static <T extends BaseTableRecord> void createRecord(String query, T tModel) {
+        try {
+            connection.createQuery(query)
+                    .bind(tModel)
+                    .executeUpdate();
+        } catch (Sql2oException e) {
+            throw new DatabaseQueryException("Error executing insert query", e);
+        } finally {
+            DatabaseConnectionUtil.closeConnection();
+        }
+    }
+
+    public static void insertAttachmentIntoDatabase(String query, byte[] bytes, int testId) {
+        try {
+            connection.createQuery(query)
+                    .addParameter("content", new ByteArrayInputStream(bytes), bytes.length)
+                    .addParameter("content_type", "image/png") //todo hardcode
+                    .addParameter("test_id", testId)
+                    .executeUpdate();
+        } catch (Sql2oException e) {
+            throw new DatabaseQueryException("Error inserting image into database", e);
         } finally {
             DatabaseConnectionUtil.closeConnection();
         }

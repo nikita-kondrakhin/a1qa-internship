@@ -2,7 +2,7 @@ package pages;
 
 import aquality.selenium.elements.interfaces.ITextBox;
 import aquality.selenium.forms.Form;
-import models.webapp.Test;
+import models.webapp.WebTableRecord;
 import org.openqa.selenium.By;
 import utils.WebTableUtil;
 
@@ -21,7 +21,7 @@ public class NexageProjectPage extends Form {
         return webTable.state().isDisplayed();
     }
 
-    public List<Test> getTestsFromNexageProjectPage() {
+    public List<WebTableRecord> getTestsFromNexageProjectPage() {
         return WebTableUtil.getTestsFromWebTable(webTable.getElement().getAttribute(INNER_HTML));
     }
 

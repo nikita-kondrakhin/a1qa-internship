@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class BaseTable {
+public abstract class BaseTableRecord {
     private Integer id;
 }

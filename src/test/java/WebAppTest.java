@@ -1,24 +1,20 @@
-import constants.DataPaths;
 import constants.TestData;
-import models.database.BaseTable;
-import models.database.LogTable;
+import models.webapp.WebTableRecord;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
 import steps.*;
 import utils.BrowserActionsUtil;
-import utils.LogUtil;
 import utils.RandomStringUtil;
 import utils.TimeUtil;
-import utils.database.DatabaseQueryUtil;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class WebAppTest extends BaseTest {
-    @Test(description = "Verify creation of new project and test via the web application UI, API and database")
-    protected void webAppTest() {
+    @Test(description = "Verify creation of new project and test record via the web application UI, API and database")
+    protected void verifyCreationOfNewProjectAndTestRecord() {
         String testStartTime = TimeUtil.getCurrentTime();
         ProjectsPageSteps.verifyProjectsPageIsOpen();
         String token = AuthenticationSteps.getToken(TestData.VARIANT_NUMBER);
@@ -29,9 +25,9 @@ public class WebAppTest extends BaseTest {
         ProjectsPageSteps.goToNexageProjectPage();
         NexageProjectPageSteps.verifyNexageProjectPageIsOpen();
         NexageProjectPageSteps.verifyWebTableDisplayed();
-        List<models.webapp.Test> testsFromPageList = NexageProjectPageSteps.getTestsFromPage();
-        List<models.webapp.Test> testsFromPageSortedList = testsFromPageList.stream()
-                .sorted(Comparator.comparing(models.webapp.Test::getLatestTestStartTime).reversed())
+        List<WebTableRecord> testsFromPageList = NexageProjectPageSteps.getTestsFromPage();
+        List<WebTableRecord> testsFromPageSortedList = testsFromPageList.stream()
+                .sorted(Comparator.comparing(WebTableRecord::getLatestTestStartTime).reversed())
                 .collect(Collectors.toList());
         NexageProjectPageSteps.verifyTestsFromPageSortedByDate(testsFromPageList, testsFromPageSortedList);
         List<String> testNamesFromPageList = NexageProjectPageSteps.getTestNamesFromPage();
@@ -50,13 +46,12 @@ public class WebAppTest extends BaseTest {
         ProjectsPageSteps.refreshPage();
         ProjectsPageSteps.verifyProjectAppearedInList(projectName);
         ProjectsPageSteps.openProjectByName(projectName);
-
-//        NewProjectPageSteps.verifyNewProjectPageIsOpen();
-
-        String testName = getClass().getSimpleName();
+        ITestResult result = Reporter.getCurrentTestResult();
+        String testName = result.getInstanceName();
+        String methodName = result.getMethod().getMethodName();
         String testEndTime = TimeUtil.getCurrentTime();
-        String log = LogUtil.getLog();
-        DatabaseSteps.addTestToDatabase(testName, testStartTime, testEndTime, log);
+        DatabaseSteps.addTestToDatabase(projectName, testName, methodName, testStartTime, testEndTime);
+//        NewProjectPageSteps.verifyNewProjectCreated(projectName);
 
     }
 }

@@ -4,13 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.File;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AttachmentTable extends BaseTable {
-    private byte[] content;
-    private String contentType;
-    private Integer testId;
+public class LogTableRecord extends BaseTableRecord {
+    String content;
+    Integer isException;
+    Integer testId;
 }
