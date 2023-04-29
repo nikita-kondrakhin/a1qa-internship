@@ -31,12 +31,17 @@ public class BrowserActionsUtil {
     }
 
     public static void switchToDefaultContent() {
-        logger.info("Switching back to default content");
+        logger.info("Switching to default content");
         driver.switchTo().defaultContent();
     }
 
     public static void executeJavaScript(String script) {
-        Logger.getInstance().info(String.format("Executing JavaScript '%s' method", script));
+        logger.info(String.format("Executing JavaScript '%s' method", script));
         browser.executeScript(script);
+    }
+
+    public byte[] getWebpageScreenshot() {
+        logger.info("Getting webpage screenshot");
+        return browser.getScreenshot(); //todo logger?
     }
 }

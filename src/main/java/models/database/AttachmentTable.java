@@ -10,7 +10,7 @@ import java.io.File;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AttachmentTable extends BaseTable {
-    private File content;
+    private byte[] content;
     private String contentType;
     private Integer testId;
 }
