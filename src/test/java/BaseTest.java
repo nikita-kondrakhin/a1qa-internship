@@ -4,21 +4,15 @@ import aquality.selenium.core.logging.Logger;
 import constants.ConfigData;
 import constants.TestData;
 import models.database.TestTableRecord;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 public abstract class BaseTest {
     private final Logger logger = AqualityServices.getLogger();
     private final Browser browser = AqualityServices.getBrowser();
-    protected TestTableRecord testTableRecord;
 
     @BeforeMethod
     protected void beforeTest() {
-//        LogUtil.deleteLogFile(); //todo
-//        ITestResult result = Reporter.getCurrentTestResult();
-//        System.out.println(result);
-//        testTableRecord.setName(result.getTestName());
-//        testTableRecord.setMethodName(result.getMethod());
-
         logger.info("Authorizing with Basic Authentication");
         browser.network().addBasicAuthentication(ConfigData.WEB_APP_HOST, TestData.USER, TestData.PASSWORD);
         browser.maximize();
@@ -26,11 +20,11 @@ public abstract class BaseTest {
         browser.waitForPageToLoad();
     }
 
-//    @AfterMethod //todo
-//    protected void afterTest() {
-//        logger.info("Ending test");
-//        if (AqualityServices.isBrowserStarted()) {
-//            browser.quit();
-//        }
-//    }
+    @AfterMethod
+    protected void afterTest() {
+        logger.info("Ending test");
+        if (AqualityServices.isBrowserStarted()) {
+            browser.quit();
+        }
+    }
 }

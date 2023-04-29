@@ -39,9 +39,4 @@ public class BrowserActionsUtil {
         logger.info(String.format("Executing JavaScript '%s' method", script));
         browser.executeScript(script);
     }
-
-    public byte[] getWebpageScreenshot() {
-        logger.info("Getting webpage screenshot");
-        return browser.getScreenshot();
-    }
 }

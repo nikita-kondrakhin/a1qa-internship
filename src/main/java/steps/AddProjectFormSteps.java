@@ -31,7 +31,7 @@ public class AddProjectFormSteps {
     }
 
     public static void closeAddProjectForm() {
-        BrowserActionsUtil.executeJavaScript(JsData.CLOSE_POP_UP_METHOD); //todo
+        BrowserActionsUtil.executeJavaScript(JsData.CLOSE_POP_UP_METHOD);
     }
 
     public static void verifyAddProjectFormIsClosed() {

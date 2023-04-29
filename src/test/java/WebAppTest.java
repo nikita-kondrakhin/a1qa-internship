@@ -51,7 +51,6 @@ public class WebAppTest extends BaseTest {
         String methodName = result.getMethod().getMethodName();
         String testEndTime = TimeUtil.getCurrentTime();
         DatabaseSteps.addTestToDatabase(projectName, testName, methodName, testStartTime, testEndTime);
-//        NewProjectPageSteps.verifyNewProjectCreated(projectName);
-
+        NewProjectPageSteps.verifyNewTestCreated(testName);
     }
 }

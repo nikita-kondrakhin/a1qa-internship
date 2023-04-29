@@ -7,23 +7,15 @@ import pages.NewProjectPage;
 
 public class NewProjectPageSteps {
     private static final Logger logger = AqualityServices.getLogger();
-//    private static final NewProjectPage newProjectPage = new NewProjectPage();
+    private static final NewProjectPage newProjectPage = new NewProjectPage();
 
     private NewProjectPageSteps() throws InstantiationException {
         throw new InstantiationException(String.format("Static %s class should not be initialized", getClass().getSimpleName()));
     }
 
-    public static void verifyNewProjectPageIsOpen(String projectName) {
-
+    public static void verifyNewTestCreated(String testName) {
+        logger.info("Checking that new test created");
+        AqualityServices.getConditionalWait().waitFor(() -> newProjectPage.isTestNameVisible(testName));
+        Assert.assertTrue(newProjectPage.isTestNameVisible(testName), "Web table is empty");
     }
-
-//    public static void verifyNewProjectCreated(String projectName) {
-//        AqualityServices.getConditionalWait().waitFor(() -> newProjectPage.isProjectCreated(projectName)); //todo
-//        Assert.assertTrue(newProjectPage.isProjectCreated(projectName));
-//    }
-
-//    public static void verifyNewProjectPageIsOpen() {
-//        logger.info(String.format("Checking that %s is open", newProjectPage.getName()));
-//        Assert.assertTrue(newProjectPage.state().isDisplayed(), String.format("%s is not open", newProjectPage.getName()));
-//    }
 }

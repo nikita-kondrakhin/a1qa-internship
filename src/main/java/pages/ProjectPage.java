@@ -8,11 +8,11 @@ import utils.WebTableUtil;
 
 import java.util.List;
 
-public class NexageProjectPage extends Form {
+public class ProjectPage extends Form {
     private static final String INNER_HTML = "innerHTML";
     private final ITextBox webTable = getElementFactory().getTextBox(By.xpath("//table[@class='table']/.."), "Tests table");
 
-    public NexageProjectPage() {
+    public ProjectPage() {
         super(By.xpath("//ol[@class='breadcrumb']//li[contains(text(), 'Nexage')]"), "Nexage project page");
     }
 

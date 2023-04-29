@@ -3,7 +3,6 @@ package utils.database;
 import exceptions.DatabaseQueryException;
 import lombok.experimental.UtilityClass;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.file.Files;
@@ -19,7 +18,8 @@ import java.util.stream.Collectors;
 
 @UtilityClass
 public class DatabaseQueryUtil {
-    private static Connection connection = DatabaseConnectionUtil.getConnection();
+    private static final Connection connection = DatabaseConnectionUtil.getConnection();
+    private static final String NAME_PARAMETER = "name";
 
     public static String readQueryFromFile(String filePath) {
         try {
@@ -45,7 +45,7 @@ public class DatabaseQueryUtil {
     public Integer getProjectIdByName(String name, String query) {
         try {
             return connection.createQuery(query)
-                    .addParameter("name", name)
+                    .addParameter(NAME_PARAMETER, name)
                     .executeScalar(Integer.class);
         } catch (Sql2oException ex) {
             throw new DatabaseQueryException("Error retrieving project id by name", ex);
@@ -78,20 +78,6 @@ public class DatabaseQueryUtil {
                     .executeUpdate();
         } catch (Sql2oException e) {
             throw new DatabaseQueryException("Error executing insert query", e);
-        } finally {
-            DatabaseConnectionUtil.closeConnection();
-        }
-    }
-
-    public static void insertAttachmentIntoDatabase(String query, byte[] bytes, int testId) {
-        try {
-            connection.createQuery(query)
-                    .addParameter("content", new ByteArrayInputStream(bytes), bytes.length)
-                    .addParameter("content_type", "image/png") //todo hardcode
-                    .addParameter("test_id", testId)
-                    .executeUpdate();
-        } catch (Sql2oException e) {
-            throw new DatabaseQueryException("Error inserting image into database", e);
         } finally {
             DatabaseConnectionUtil.closeConnection();
         }

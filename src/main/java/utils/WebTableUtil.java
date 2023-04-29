@@ -20,7 +20,7 @@ public class WebTableUtil {
     private static final String TR = "tr";
 
     public static List<WebTableRecord> getTestsFromWebTable(String html) {
-        logger.info("Getting tests from web table");
+        logger.info("Retrieving tests from web table");
         Document doc = Jsoup.parse(html, StandardCharsets.UTF_8.name());
         Elements rows = doc.select(TR);
         Elements firstRow = Objects.requireNonNull(rows.first()).select(TH_TD);
