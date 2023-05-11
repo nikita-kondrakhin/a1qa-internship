@@ -44,17 +44,18 @@ public class DatabaseSteps {
 
     private static int createTestRecordAndGetId(String testName, String methodName, int projectRecordId, String testStartTime, String testEndTime) {
         logger.info("Creating test record in database and retrieving test id");
-        TestTableRecord testTableRecord = new TestTableRecord();
-        testTableRecord.setName(testName);
-        testTableRecord.setStatusId(STATUS_ID);
-        testTableRecord.setMethodName(methodName);
-        testTableRecord.setProjectId(projectRecordId);
-        testTableRecord.setSessionId(SESSION_ID);
-        testTableRecord.setStartTime(testStartTime);
-        testTableRecord.setEndTime(testEndTime);
-        testTableRecord.setEnv(ENV);
-        testTableRecord.setBrowser(AqualityServices.getBrowser().getBrowserName().name());
-        testTableRecord.setAuthorId(null);
+        TestTableRecord testTableRecord = TestTableRecord.builder()
+                .name(testName)
+                .statusId(STATUS_ID)
+                .methodName(methodName)
+                .projectId(projectRecordId)
+                .sessionId(SESSION_ID)
+                .startTime(testStartTime)
+                .endTime(testEndTime)
+                .env(ENV)
+                .browser(AqualityServices.getBrowser().getBrowserName().name())
+                .authorId(null)
+                .build();
 
         String insertTestQuery = DatabaseQueryUtil.readQueryFromFile(Queries.INSERT_TEST_QUERY);
         return DatabaseQueryUtil.createRecordAndGetId(insertTestQuery, testTableRecord);
@@ -62,10 +63,11 @@ public class DatabaseSteps {
 
     private static void createLogRecord(int testRecordId, String log) {
         logger.info("Creating log record in database");
-        LogTableRecord logTableRecord = new LogTableRecord();
-        logTableRecord.setContent(log);
-        logTableRecord.setIsException(IS_EXCEPTION);
-        logTableRecord.setTestId(testRecordId);
+        LogTableRecord logTableRecord = LogTableRecord.builder()
+                .content(log)
+                .isException(IS_EXCEPTION)
+                .testId(testRecordId)
+                .build();
 
         String insertLogQuery = DatabaseQueryUtil.readQueryFromFile(Queries.INSERT_LOG_QUERY);
         DatabaseQueryUtil.createRecord(insertLogQuery, logTableRecord);
