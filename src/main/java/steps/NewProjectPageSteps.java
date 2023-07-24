@@ -18,4 +18,8 @@ public class NewProjectPageSteps {
         AqualityServices.getConditionalWait().waitFor(() -> newProjectPage.isTestNameVisible(testName));
         Assert.assertTrue(newProjectPage.isTestNameVisible(testName), "Web table is empty");
     }
+
+    public static void openTestByName(String testName) {
+        newProjectPage.clickNewTest(testName);
+    }
 }

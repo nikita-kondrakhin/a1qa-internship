@@ -2,6 +2,7 @@ import constants.TestData;
 import models.webapp.WebTableRecord;
 import org.testng.ITestResult;
 import org.testng.Reporter;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import steps.*;
 import utils.BrowserActionsUtil;
@@ -50,7 +51,13 @@ public class WebAppTest extends BaseTest {
         String testName = result.getInstanceName();
         String methodName = result.getMethod().getMethodName();
         String testEndTime = TimeUtil.getCurrentTime();
-        DatabaseSteps.addTestToDatabase(projectName, testName, methodName, testStartTime, testEndTime);
+        byte[] screenshot = BrowserActionsUtil.getScreenshot();
+        DatabaseSteps.addTestToDatabase(projectName, testName, methodName, testStartTime, testEndTime, screenshot);
         NewProjectPageSteps.verifyNewTestCreated(testName);
+        NewProjectPageSteps.openTestByName(testName);
+        NewTestPageSteps.verifyNewTestPageIsOpened();
+        NewTestPageSteps.verifyTestData();
+        NewTestPageSteps.openScreenshot();
+        NewTestPageSteps.verifyScreenshot(screenshot);
     }
 }

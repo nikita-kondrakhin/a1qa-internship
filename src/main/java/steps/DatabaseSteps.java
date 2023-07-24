@@ -4,6 +4,7 @@ import aquality.selenium.browser.AqualityServices;
 import aquality.selenium.core.logging.Logger;
 import constants.Queries;
 import constants.TestData;
+import models.database.AttachmentTableRecord;
 import models.database.LogTableRecord;
 import models.database.TestTableRecord;
 import utils.LogUtil;
@@ -17,8 +18,7 @@ public class DatabaseSteps {
     private static final int SESSION_ID = 1;
     private static final String ENV = "Nikita";
     private static final int IS_EXCEPTION = 1;
-
-
+    private static final String IMAGE_CONTENT_TYPE = "image/png";
 
     private DatabaseSteps() throws InstantiationException {
         throw new InstantiationException(String.format("Static %s class should not be initialized", getClass().getSimpleName()));
@@ -30,10 +30,11 @@ public class DatabaseSteps {
         return DatabaseQueryUtil.getDatabaseColumnValues(query, TestData.COLUMN_NAME);
     }
 
-    public static void addTestToDatabase(String projectName, String testName, String methodName, String testStartTime, String testEndTime) {
+    public static void addTestToDatabase(String projectName, String testName, String methodName, String testStartTime, String testEndTime, byte[] screenshot) {
         int projectRecordId = getProjectRecordId(projectName);
         int testRecordId = createTestRecordAndGetId(testName, methodName, projectRecordId, testStartTime, testEndTime);
         createLogRecord(testRecordId, LogUtil.getLog());
+        createAttachmentRecord(testRecordId, screenshot);
     }
 
     private static int getProjectRecordId(String projectName) {
@@ -71,5 +72,17 @@ public class DatabaseSteps {
 
         String insertLogQuery = DatabaseQueryUtil.readQueryFromFile(Queries.INSERT_LOG_QUERY);
         DatabaseQueryUtil.createRecord(insertLogQuery, logTableRecord);
+    }
+
+    private static void createAttachmentRecord(int testRecordId, byte[] screenshot) {
+        logger.info("Creating attachment record in database");
+        AttachmentTableRecord attachmentTableRecord = AttachmentTableRecord.builder()
+                .content(screenshot)
+                .contentType(IMAGE_CONTENT_TYPE)
+                .testId(testRecordId)
+                .build();
+
+        String insertAttachmentQuery = DatabaseQueryUtil.readQueryFromFile(Queries.INSERT_ATTACHMENT_QUERY);
+        DatabaseQueryUtil.createRecord(insertAttachmentQuery, attachmentTableRecord);
     }
 }
